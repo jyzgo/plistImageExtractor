@@ -80,7 +80,20 @@ def frames_from_data(filename):
         outImg.save(outfile)
 
 
+def all_plist_extract():
+    current_dir = os.getcwd()
+    directory = os.fsencode(current_dir)
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".plist"):
+            noextension = os.path.splitext(filename)[0]
+            print("filename " + noextension)
+            frames_from_data(noextension)
+
+
 if __name__ == '__main__':
-    outfile = "outtest.png"
-    filename = sys.argv[1]
-    frames_from_data(filename)
+    if(len(sys.argv) > 1):
+        filename = sys.argv[1]
+        frames_from_data(filename)
+    else:
+        all_plist_extract()
